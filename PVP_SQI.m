@@ -32,8 +32,8 @@ for l = 1:3
 end
 
 alpha = tfrsqtic(2)-tfrsqtic(1);
-[h, ~] = hermf(sampling_rate*10+1, 1, 6) ;
-coeff = h(sampling_rate*5+1) ;%
+[h, ~] = hermf(basicTF.win, 1, 6) ;
+coeff = h(0.5*(basicTF.win+1)) ;%
 C = 2 * alpha / coeff ; % the normalizing coeffient for the reconstruction of SST
 
 recon = zeros(1,size(card_tfrsq,2));% reconstruct cardiac signal with sampling rate same as the hopping frequency = basicTF.hop
@@ -58,8 +58,8 @@ epoch_len = 10;% time length of PVP epochs, unit=second.
 epoch_num = floor(length(PVP_dtr)./(sampling_rate*epoch_len));
 SQI = zeros(epoch_num,1);
 for i = 1:epoch_num
-    s = (i-1)*sampling_rate/basicTF.hop*10;
-    t = i*sampling_rate/basicTF.hop*10;
+    s = (i-1)*sampling_rate/basicTF.hop*epoch_len;
+    t = i*sampling_rate/basicTF.hop*epoch_len;
     SQI(i)= median(SQI_tmp(s+1:t));
 end
 

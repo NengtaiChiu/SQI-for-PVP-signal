@@ -1,4 +1,5 @@
 clear all;close all;
+addpath('TF_anaylsis');
 %% generate the simulated data
 fs = 100;% sampling_rate
 time = [1/fs:1/fs:120]' ;
